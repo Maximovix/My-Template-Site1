@@ -18,8 +18,6 @@ $(function() {
 		heightWindow = $(window).width();
 		heightIntro = $('.intro').outerWidth();
 
-		console.log(scroll);
-		console.log(heightIntro);
   		if ((heightWindow < 450) && (scroll < heightIntro)) {
 			$('.header').css('opacity','0');
 		}else {
