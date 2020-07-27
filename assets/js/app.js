@@ -13,13 +13,19 @@ $(function() {
 	}
 
 	/* Change the Orientation*/
-	/*window.addEventListener("orientationchange", function() {
-		if (heightWindow < 450) {
+	$(window).on("orientationchange",function(event){
+		scroll = $(this).scrollTop();
+		heightWindow = $(window).width();
+		heightIntro = $('.intro').outerWidth();
+
+		console.log(scroll);
+		console.log(heightIntro);
+  		if ((heightWindow < 450) && (scroll < heightIntro)) {
 			$('.header').css('opacity','0');
-		} else {
+		}else {
 			$('.header').css('opacity','1');
 		}
-	}, true);*/
+	});
 
 	/* Background video none */
 	$(window).scroll(function(event) {
