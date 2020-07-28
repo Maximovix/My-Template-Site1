@@ -2608,6 +2608,18 @@ body[data-aos-easing=ease-in-out-quart] [data-aos] {
   }
 }
 
+@media (max-width: 1100px) {
+  /* Modal Contact */
+
+  .modal__hobby {
+    background: none;
+  }
+
+  .modal__part {
+    width: 100%;
+  }
+}
+
 @media (max-width: 1030px) {
   .name {
     font-size: 1rem;
@@ -2653,16 +2665,6 @@ body[data-aos-easing=ease-in-out-quart] [data-aos] {
   .download {
     margin-top: 4rem;
   }
-
-  /* Modal Contact */
-
-  .modal__hobby {
-    background: none;
-  }
-
-  .modal__part {
-    width: 100%;
-  }
 }
 
 @media (max-width: 950px) {
@@ -2677,12 +2679,20 @@ body[data-aos-easing=ease-in-out-quart] [data-aos] {
 }
 
 @media (max-width: 940px) {
+  .intro {
+    padding-top: 3rem;
+  }
+
   .intro__title {
     font-size: 5rem;
   }
 
   .intro__subtitle {
     font-size: 3rem;
+  }
+
+  .intro__video:after {
+    display: none;
   }
 }
 
@@ -3075,7 +3085,7 @@ body[data-aos-easing=ease-in-out-quart] [data-aos] {
   }
 
   .modal__hobby {
-    height: 100vh;
+    height: 100%;
   }
 }
 

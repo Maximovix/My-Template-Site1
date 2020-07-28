@@ -44,25 +44,17 @@ $(function() {
 			}
 
 			if (scroll >= (heightIntro - heightHeader)) {
-				$('.header').addClass('fixed');
-				$('.header.fixed').css('top','0');
-				$('.header.fixed').css('zIndex','10');
+				fixedHeader();
 			} else {
-				$('.intro__video').css('display', 'block');
-				$('.header.fixed').css('top','-100%');
-				$('.header.fixed').css('zIndex','0');
+				hideHeader();
 			}
 
 			if ((scroll >= (heightIntro - heightHeader)) && (heightWindow < 450)) {
 				$('.header').css('opacity','1');
-				$('.header').addClass('fixed');
-				$('.header.fixed').css('top','0');
-				$('.header.fixed').css('zIndex','10');
+				fixedHeader();
 			} else if (heightWindow < 450) {
 				$('.header').css('opacity','0');
-				$('.intro__video').css('display', 'block');
-				$('.header.fixed').css('top','-100%');
-				$('.header.fixed').css('zIndex','0');
+				hideHeader();
 			}
 
 			if (scroll > heightIntro) {
@@ -70,6 +62,18 @@ $(function() {
 			} else {
 				$('.intro__video').css('display', 'block');
 			}
+		}
+
+		function fixedHeader() {
+			$('.header').addClass('fixed');
+			$('.header.fixed').css('top','0');
+			$('.header.fixed').css('zIndex','10');
+		}
+
+		function hideHeader() {
+			$('.intro__video').css('display', 'block');
+			$('.header.fixed').css('top','-100%');
+			$('.header.fixed').css('zIndex','0');
 		}
 
 	/* Modal */
@@ -93,18 +97,32 @@ $(function() {
 
 	modalClose.on("click", function(event) {
 		event.preventDefault();
-		let $this = $(this);
-		let modalParent = $this.parents('.modal');
+		let $this = $(this),
+			modalParent = $this.parents('.modal'),
+			widthWindow = $(window).width(),
+			data = $(this).data(),
+			close = data.close;
 
+		if ((widthWindow < 915) && (close == 'resume')) {
+			modalMobile(modalParent);
+
+		}else {
+			modalMobile(modalParent);
+			$("body").removeClass('no_scroll');
+		}
+
+			
+	}) 
+
+	function modalMobile(modalParent) {
 		$(modalParent).find('.modal__dialog').css({
 			transform: 'rotateX(90deg)'
 		});
 
 		setTimeout(function() {
 			modalParent.removeClass('show');
-			$("body").removeClass('no_scroll');
 		}, 200)
-	}) 
+	}
 
 	$(".modal").on("click", function(event) {
 		let $this = $(this);
@@ -175,8 +193,8 @@ $(function() {
 	  delay: 0, // values from 0 to 3000, with step 50ms
 	  duration: 400, // values from 0 to 3000, with step 50ms
 	  easing: 'ease', // default easing for AOS animations
-	  once: true, // whether animation should happen only once - while scrolling down
-	  mirror: true, // whether elements should animate out while scrolling past them
+	  once: false, // whether animation should happen only once - while scrolling down
+	  mirror: false, // whether elements should animate out while scrolling past them
 	  anchorPlacement: 'top-bottom', // defines which position of the element regarding to window should trigger the animation
 
 	});
