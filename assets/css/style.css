@@ -3233,6 +3233,10 @@ body[data-aos-easing=ease-in-out-quart] [data-aos] {
 }
 
 @media (max-height: 600px) {
+  .intro {
+    padding-top: 0;
+  }
+
   .intro__content {
     margin-top: 150px;
   }
