@@ -8,7 +8,7 @@ $(function() {
 	update(scroll, heightIntro, heightHeader);
 
 	/* Header small height*/
-	if (heightWindow < 450) {
+	if (heightWindow <= 450) {
 		$('.header').css('opacity','0');
 	}
 
@@ -18,7 +18,7 @@ $(function() {
 		heightWindow = $(window).width();
 		heightIntro = $('.intro').outerWidth();
 
-  		if ((heightWindow < 450) && (scroll < heightIntro)) {
+  		if ((heightWindow <= 450) && (scroll < heightIntro)) {
 			$('.header').css('opacity','0');
 		}else {
 			$('.header').css('opacity','1');
@@ -49,10 +49,10 @@ $(function() {
 				hideHeader();
 			}
 
-			if ((scroll >= (heightIntro - heightHeader)) && (heightWindow < 450)) {
+			if ((scroll >= (heightIntro - heightHeader)) && (heightWindow <= 450)) {
 				$('.header').css('opacity','1');
 				fixedHeader();
-			} else if (heightWindow < 450) {
+			} else if (heightWindow <= 450) {
 				$('.header').css('opacity','0');
 				hideHeader();
 			}
