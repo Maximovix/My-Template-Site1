@@ -77,7 +77,7 @@ $(function() {
 		}
 
 	/* Modal */
-	const modalCall = $("[data-modal]");
+/*	const modalCall = $("[data-modal]");
 	const modalClose = $("[data-close]");
 
 	modalCall.on("click", function(event) {
@@ -139,7 +139,7 @@ $(function() {
 
 	$(".modal__dialog").on("click", function(event) {
 		event.stopPropagation();
-	}) 
+	}) */
 
 	/* Scroll */
 	$('[data-scroll]').click(function(event) {
@@ -151,7 +151,7 @@ $(function() {
 
 
 			$('.header__burger,.nav').removeClass('active');
-			$('body').removeClass('no_scroll');
+			$('body').removeClass('lock');
 
 		$('html,body').animate({
 			scrollTop: blockOffSet
@@ -162,8 +162,14 @@ $(function() {
 	$('.header__burger').click(function(event) {
 		event.preventDefault();
 
-		$('.header__burger,.nav').toggleClass('active');
-		$('body').toggleClass('no_scroll');
+
+		if ($('.header__burger').hasClass('active')) {
+			$('body').removeClass('lock');
+			$('.header__burger,.nav').removeClass('active');
+		} else {
+			$('body').addClass('lock');
+			$('.header__burger,.nav').addClass('active');
+		}
 	});
 
 	/* Animation */
