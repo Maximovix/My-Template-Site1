@@ -18,6 +18,8 @@ $(function() {
 		heightWindow = $(window).width();
 		heightIntro = $('.intro').outerWidth();
 
+		noLock();
+
   		if ((heightWindow <= 450) && (scroll < heightIntro)) {
 			$('.header').css('opacity','0');
 		}else {
@@ -149,9 +151,7 @@ $(function() {
 			blockOffSet = $(blockID).offset().top;
 			heightHeader = $('.header').outerHeight();
 
-
-			$('.header__burger,.nav').removeClass('active');
-			$('body').removeClass('lock');
+		noLock();
 
 		$('html,body').animate({
 			scrollTop: blockOffSet
@@ -164,13 +164,17 @@ $(function() {
 
 
 		if ($('.header__burger').hasClass('active')) {
-			$('body').removeClass('lock');
-			$('.header__burger,.nav').removeClass('active');
+			noLock();
 		} else {
 			$('body').addClass('lock');
 			$('.header__burger,.nav').addClass('active');
 		}
 	});
+
+	function noLock() {
+		$('.header__burger,.nav').removeClass('active');
+		$('body').removeClass('lock');
+	}
 
 	/* Animation */
 
