@@ -339,6 +339,10 @@ section {
   margin: -2rem 0;
 }
 
+.hobby__content {
+  overflow: hidden;
+}
+
 .hobby__item {
   display: block;
   text-decoration: none;
@@ -571,7 +575,7 @@ section {
   color: #8D8D8D;
 }
 
-.write-me {
+.write {
   padding-top: 6rem;
   padding-bottom: 8rem;
 }
@@ -612,22 +616,31 @@ section {
 }
 
 .button {
-  background: none;
   padding: .6rem 3rem;
-  background-color: #fff;
-  border: 3px solid #6A696B;
+  background-color: #D5966B;
   border-radius: 1.5rem;
-  color: #6A696B;
+  -webkit-box-shadow: 0 6px 0 #C06F39;
+          box-shadow: 0 6px 0 #C06F39;
+  color: #fff;
   font-weight: 700;
-  -webkit-transition: background .3s linear, color .3s linear, border .3s linear;
-  -o-transition: background .3s linear, color .3s linear, border .3s linear;
-  transition: background .3s linear, color .3s linear, border .3s linear;
+  outline: none;
+  cursor: pointer;
+  position: relative;
+  top: 0;
+  -webkit-transition: all .4s ease 0s;
+  -o-transition: all .4s ease 0s;
+  transition: all .4s ease 0s;
 }
 
 .button:hover {
-  border-color: #D5966B;
-  background-color: #D5966B;
-  color: #fff;
+  background-color: #DCAB8D;
+}
+
+.button:active {
+  top: 6px;
+  -webkit-box-shadow: 0 0px 0 #C06F39;
+          box-shadow: 0 0px 0 #C06F39;
+  background-color: #C06F39;
 }
 
 .label {
@@ -817,7 +830,7 @@ section {
 }
 
 .modal__resume {
-  padding: 2rem 6rem;
+  padding: 4rem 6rem;
 }
 
 .modal__title {
@@ -834,23 +847,30 @@ section {
 
 .download a {
   display: inline-block;
-  color: #2B2A2C;
   text-decoration: none;
   padding: .6rem 3rem;
-  background-color: #fff;
-  border: 3px solid #6A696B;
+  background-color: #6A696B;
+  -webkit-box-shadow: 0 6px 0 #4C4C4C;
+          box-shadow: 0 6px 0 #4C4C4C;
   border-radius: 1.5rem;
-  color: #6A696B;
+  color: #fff;
   font-weight: 700;
-  -webkit-transition: background .3s linear, color .3s linear, border .3s linear;
-  -o-transition: background .3s linear, color .3s linear, border .3s linear;
-  transition: background .3s linear, color .3s linear, border .3s linear;
+  position: relative;
+  top: 0;
+  -webkit-transition: all .4s ease 0s;
+  -o-transition: all .4s ease 0s;
+  transition: all .4s ease 0s;
 }
 
 .download a:hover {
-  border-color: #D5966B;
-  background-color: #D5966B;
-  color: #fff;
+  background-color: #939393;
+}
+
+.download a:active {
+  top: 3px;
+  -webkit-box-shadow: 0 3px 0 #C06F39;
+          box-shadow: 0 3px 0 #C06F39;
+  background-color: #DCAB8D;
 }
 
 .modal__timeline {
@@ -927,7 +947,7 @@ section {
 
 .modal__part {
   width: 60%;
-  padding: 5.5rem 3rem;
+  padding: 5rem 3rem;
   color: #2B2A2C;
 }
 
@@ -2546,8 +2566,20 @@ body[data-aos-easing=ease-in-out-quart] [data-aos] {
 }
 
 @media (max-width: 1500px) {
+  .me {
+    width: 30%;
+  }
+
   .video {
     top: 0;
+  }
+
+  .nav {
+    width: 70%;
+  }
+
+  .about__inner {
+    overflow: hidden;
   }
 }
 
@@ -2559,17 +2591,13 @@ body[data-aos-easing=ease-in-out-quart] [data-aos] {
   .intro__subtitle {
     font-size: 4rem;
   }
-
-  .me {
-    width: 30%;
-  }
-
-  .nav {
-    width: 70%;
-  }
 }
 
 @media (max-width: 1230px) {
+  .nav {
+    margin-left: 2rem;
+  }
+
   .about__inner {
     padding: 0 2rem;
     -ms-grid-columns: 1fr 1fr;
@@ -2618,24 +2646,20 @@ body[data-aos-easing=ease-in-out-quart] [data-aos] {
   .footer__link {
     padding: 0 .3rem;
   }
-}
-
-@media (max-width: 1200px) {
-  .container {
-    width: 100%;
-  }
 
   .modal__hobby {
     background: url(../images/modal/guitar.jpg) right 1.5rem center no-repeat;
-    background-size: 30%;
+    background-size: 27%;
   }
 
   .modal__part {
     width: 70%;
   }
+}
 
-  .nav {
-    margin-left: 2rem;
+@media (max-width: 1200px) {
+  .container {
+    width: 100%;
   }
 }
 
@@ -2908,7 +2932,7 @@ body[data-aos-easing=ease-in-out-quart] [data-aos] {
     height: 500px;
   }
 
-  .write-me {
+  .write {
     padding-bottom: 5rem;
     padding-top: 7rem;
   }
@@ -2941,6 +2965,10 @@ body[data-aos-easing=ease-in-out-quart] [data-aos] {
     text-align: center;
   }
 
+  .my__image {
+    margin: 0 auto;
+  }
+
   .about__inner {
     -ms-grid-columns: 1fr;
     grid-template-columns: 1fr;
@@ -2955,10 +2983,6 @@ body[data-aos-easing=ease-in-out-quart] [data-aos] {
   .about__content {
     margin-bottom: 3rem;
     padding: 0 2rem;
-  }
-
-  .my__image {
-    margin: 0 auto;
   }
 
   .hobby__inner {
@@ -3075,9 +3099,6 @@ body[data-aos-easing=ease-in-out-quart] [data-aos] {
 
   .about__content {
     padding: 0;
-  }
-
-  .about__content {
     margin-bottom: 1.5rem;
   }
 
@@ -3267,7 +3288,7 @@ body[data-aos-easing=ease-in-out-quart] [data-aos] {
 
 .webp .modal__hobby { background: url(../images/modal/guitar.webp) right center no-repeat; }
 
-@media (max-width: 1200px) {
+@media (max-width: 1230px) {
 
   .webp .modal__hobby { background: url(../images/modal/guitar.webp) right 1.5rem center no-repeat; }
 }

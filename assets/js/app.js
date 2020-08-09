@@ -174,9 +174,9 @@ $(function() {
 
 	/* Animation */
 
-	if (widthWindow < 1500) {
+	/*if (widthWindow < 1500) {
 		$('.about__content,.hobby__content').removeAttr('data-aos');
-	}
+	}*/
 
 	AOS.init();
 
