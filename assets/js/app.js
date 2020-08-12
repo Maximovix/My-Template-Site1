@@ -144,6 +144,7 @@ $(function() {
 	}) */
 
 	/* Scroll */
+	let scrollUnlock = true;
 	$('[data-scroll]').click(function(event) {
 		event.preventDefault();
 
@@ -151,12 +152,64 @@ $(function() {
 			blockOffSet = $(blockID).offset().top;
 			heightHeader = $('.header').outerHeight();
 
+		scrollUnlock = false;
 		noLock();
 
 		$('html,body').animate({
-			scrollTop: blockOffSet
-		}, 700);
+			scrollTop: blockOffSet,
+		}, 700,
+			(function() {
+				scrollUnlock = true;
+			}) // Функция выполняющаяся после завершения анимации.
+		);
 	})
+
+	/*Active Nav*/
+	$('.nav__item').click(function(event) {
+		event.preventDefault();
+
+		$('.nav__item').removeClass('active');
+
+		$(this).addClass('active');
+	});
+
+	$(window).scroll(function(event) {
+		event.preventDefault();
+
+		console.log(scrollUnlock);
+		
+		let scroll = $(this).scrollTop(),
+			offsetAbout = $('.about').offset().top,
+			offsetHobby = $('.hobby').offset().top,
+			offsetAims = $('.aims').offset().top,
+			offsetWorks = $('.works').offset().top,
+			offsetWrite = ($('.write').offset().top) - 100,
+			offsetIntro = $('.intro').offset().top;
+
+	if(scrollUnlock) {
+			if(scroll < offsetAbout) {
+				$('.nav__item').removeClass('active');
+			} else if ((scroll >= offsetAbout) && (offsetHobby > scroll)) {
+				$('.nav__item').removeClass('active');
+				$('#nav-about').addClass('active');
+			} else if ((scroll >= offsetHobby) && (offsetAims > scroll)) {
+				$('.nav__item').removeClass('active');
+				$('#nav-hobby').addClass('active');
+			} else if ((scroll >= offsetAims) && (offsetWorks > scroll)) {
+				$('.nav__item').removeClass('active');
+				$('#nav-aims').addClass('active');
+			} else if ((scroll >= offsetWorks) && (offsetWrite > scroll)) {
+				$('.nav__item').removeClass('active');
+				$('#nav-works').addClass('active');
+			} else if (scroll >= offsetWrite) {
+				$('.nav__item').removeClass('active');
+				$('#nav-write').addClass('active');
+			} else {
+				$('.nav__item').removeClass('active');
+			}
+		}
+	})
+	
 
 	/*Burger*/
 	$('.header__burger').click(function(event) {
@@ -181,7 +234,7 @@ $(function() {
 	/*if (widthWindow < 1500) {
 		$('.about__content,.hobby__content').removeAttr('data-aos');
 	}*/
-
+	
 	AOS.init();
 
 // You can also pass an optional settings object
