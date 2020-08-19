@@ -1,6 +1,7 @@
-let animItems = document.querySelectorAll('.anim-items');
+let animItems = document.querySelectorAll('.anim-items'),
+	width = screen.width;
 
-if (animItems.length > 0) {
+if ((animItems.length > 0) && (width > 800)) {
 	window.addEventListener('scroll',animOnScroll);
 	function animOnScroll() {
 		for (let index = 0; index < animItems.length; index++) {
@@ -35,4 +36,9 @@ if (animItems.length > 0) {
 	setTimeout(() => {
 		animOnScroll();
 	},  300)
+} else if (animItems.length > 0) {
+	for (let index = 0; index < animItems.length; index++) {
+			const animItem = animItems[index];
+			animItem.classList.add('active');
+	}
 }

@@ -36,112 +36,49 @@ $(function() {
 	});
 
 	function update(scroll, heightIntro, heightHeader, heightWindow) {
-			if (scroll > heightHeader) {
-				$('.header').css('top','-100%');
-				$('.header').css('zIndex','0');
-			} else {
-				$('.header').css('top','0');
-				$('.header').css('zIndex','5');
-				$('.header').removeClass('fixed');
-			}
-
-			if (scroll >= (heightIntro - heightHeader)) {
-				fixedHeader();
-			} else {
-				hideHeader();
-			}
-
-			if ((scroll >= (heightIntro - heightHeader)) && (heightWindow <= 450)) {
-				$('.header').css('opacity','1');
-				fixedHeader();
-			} else if (heightWindow <= 450) {
-				$('.header').css('opacity','0');
-				hideHeader();
-			}
-
-			if (scroll > heightIntro) {
-				$('.intro__video').css('display', 'none');
-			} else {
-				$('.intro__video').css('display', 'block');
-			}
+		if (scroll > heightHeader) {
+			$('.header').css('top','-100%');
+			$('.header').css('zIndex','0');
+		} else {
+			$('.header').css('top','0');
+			$('.header').css('zIndex','5');
+			$('.header').removeClass('fixed');
 		}
 
-		function fixedHeader() {
-			$('.header').addClass('fixed');
-			$('.header.fixed').css('top','0');
-			$('.header.fixed').css('zIndex','10');
+		if (scroll >= (heightIntro - heightHeader)) {
+			fixedHeader();
+			$('.button__return').addClass('active');
+		} else {
+			hideHeader();
+			$('.button__return').removeClass('active');
 		}
 
-		function hideHeader() {
+		if ((scroll >= (heightIntro - heightHeader)) && (heightWindow <= 450)) {
+			$('.header').css('opacity','1');
+			fixedHeader();
+		} else if (heightWindow <= 450) {
+			$('.header').css('opacity','0');
+			hideHeader();
+		}
+
+		if (scroll > heightIntro) {
+			$('.intro__video').css('display', 'none');
+		} else {
 			$('.intro__video').css('display', 'block');
-			$('.header.fixed').css('top','-100%');
-			$('.header.fixed').css('zIndex','0');
 		}
-
-	/* Modal */
-/*	const modalCall = $("[data-modal]");
-	const modalClose = $("[data-close]");
-
-	modalCall.on("click", function(event) {
-		event.preventDefault();
-		let $this = $(this);
-		let modalId = $this.data('modal');
-		
-		$(modalId).addClass('show');
-		$("body").addClass('no_scroll');
-
-		setTimeout(function() {
-			$(modalId).find('.modal__dialog').css({
-				transform: 'rotateX(0)'
-			});
-		}, 200)
-	}) 
-
-	modalClose.on("click", function(event) {
-		event.preventDefault();
-		let $this = $(this),
-			modalParent = $this.parents('.modal'),
-			widthWindow = $(window).width(),
-			data = $(this).data(),
-			close = data.close;
-
-		if ((widthWindow < 915) && (close == 'resume')) {
-			modalMobile(modalParent);
-
-		}else {
-			modalMobile(modalParent);
-			$("body").removeClass('no_scroll');
-		}
-
-			
-	}) 
-
-	function modalMobile(modalParent) {
-		$(modalParent).find('.modal__dialog').css({
-			transform: 'rotateX(90deg)'
-		});
-
-		setTimeout(function() {
-			modalParent.removeClass('show');
-		}, 200)
 	}
 
-	$(".modal").on("click", function(event) {
-		let $this = $(this);
+	function fixedHeader() {
+		$('.header').addClass('fixed');
+		$('.header.fixed').css('top','0');
+		$('.header.fixed').css('zIndex','10');
+	}
 
-		$this.find('.modal__dialog').css({
-			transform: 'rotateX(90deg)'
-		});
-
-		setTimeout(function() {
-			$this.removeClass('show');
-			$("body").removeClass('no_scroll');
-		}, 200)
-	}) 
-
-	$(".modal__dialog").on("click", function(event) {
-		event.stopPropagation();
-	}) */
+	function hideHeader() {
+		$('.intro__video').css('display', 'block');
+		$('.header.fixed').css('top','-100%');
+		$('.header.fixed').css('zIndex','0');
+	}
 
 	/* Scroll */
 	let scrollUnlock = true;
@@ -155,6 +92,8 @@ $(function() {
 		scrollUnlock = false;
 		noLock();
 
+		$('.nav__item').removeClass('active');
+
 		$('html,body').animate({
 			scrollTop: blockOffSet,
 		}, 700,
@@ -163,6 +102,17 @@ $(function() {
 			}) // Функция выполняющаяся после завершения анимации.
 		);
 	})
+
+	/* Arrow Scroll */
+	$('.intro__arrow').click(function(event) {
+		event.preventDefault();
+
+		let blockOffSetAbout = $('#about').offset().top;
+
+		$('html,body').animate({
+			scrollTop: blockOffSetAbout,
+		}, 700);
+	});
 
 	/*Active Nav*/
 	$('.nav__item').click(function(event) {
@@ -173,11 +123,20 @@ $(function() {
 		$(this).addClass('active');
 	});
 
-	$(window).scroll(function(event) {
+	$('.close-modal').click(function(event) {
 		event.preventDefault();
 
-		console.log(scrollUnlock);
+		$('.nav__item').removeClass('active');
+		checkNav();
+	});
+
+	$(window).scroll(function(event) {
+		event.preventDefault();
 		
+		checkNav();
+	})
+
+	function checkNav() {
 		let scroll = $(this).scrollTop(),
 			offsetAbout = $('.about').offset().top,
 			offsetHobby = $('.hobby').offset().top,
@@ -186,7 +145,7 @@ $(function() {
 			offsetWrite = ($('.write').offset().top) - 100,
 			offsetIntro = $('.intro').offset().top;
 
-	if(scrollUnlock) {
+		if(scrollUnlock) {
 			if(scroll < offsetAbout) {
 				$('.nav__item').removeClass('active');
 			} else if ((scroll >= offsetAbout) && (offsetHobby > scroll)) {
@@ -208,8 +167,7 @@ $(function() {
 				$('.nav__item').removeClass('active');
 			}
 		}
-	})
-	
+	}
 
 	/*Burger*/
 	$('.header__burger').click(function(event) {
@@ -229,36 +187,35 @@ $(function() {
 		$('body').removeClass('lock');
 	}
 
-	/* Animation */
+	/* Line-Scroll */
+	$(window).scroll(function(event) {
+		event.preventDefault();
 
-	/*if (widthWindow < 1500) {
-		$('.about__content,.hobby__content').removeAttr('data-aos');
-	}*/
-	
-	AOS.init();
+		checkLineWidth();
+	});
 
-// You can also pass an optional settings object
-// below listed default settings
-	AOS.init({
-	  // Global settings:
-	  disable: false, // accepts following values: 'phone', 'tablet', 'mobile', boolean, expression or function
-	  startEvent: 'DOMContentLoaded', // name of the event dispatched on the document, that AOS should initialize on
-	  initClassName: 'aos-init', // class applied after initialization
-	  animatedClassName: 'aos-animate', // class applied on animation
-	  useClassNames: false, // if true, will add content of `data-aos` as classes on scroll
-	  disableMutationObserver: false, // disables automatic mutations' detections (advanced)
-	  debounceDelay: 50, // the delay on debounce used while resizing window (advanced)
-	  throttleDelay: 99, // the delay on throttle used while scrolling the page (advanced)
-	  
+	function checkLineWidth(params) {
+		let	heightIntro = $('.intro').outerHeight(),
+			scroll = $(this).scrollTop(),
+			heightFull = $(document).outerHeight(true) - heightIntro,
+			lineScrollWidth = (scroll / heightFull) * 100;
 
-	  // Settings that can be overridden on per-element basis, by `data-aos-*` attributes:
-	  offset: 450, // offset (in px) from the original trigger point
-	  delay: 0, // values from 0 to 3000, with step 50ms
-	  duration: 400, // values from 0 to 3000, with step 50ms
-	  easing: 'ease', // default easing for AOS animations
-	  once: false, // whether animation should happen only once - while scrolling down
-	  mirror: false, // whether elements should animate out while scrolling past them
-	  anchorPlacement: 'top-bottom', // defines which position of the element regarding to window should trigger the animation
+			if (scroll >= heightIntro) {
 
+				$('.line__scroll').css({
+					width: lineScrollWidth + '%'
+				});
+			}
+	}
+
+	checkLineWidth();
+
+	/* Arrow Return */
+	$('.arrow__return').click(function(event) {
+		event.preventDefault();
+
+		$('html,body').animate({
+			scrollTop: 0,
+		}, 700);
 	});
 }) 
